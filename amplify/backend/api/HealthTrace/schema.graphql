@@ -1,0 +1,50 @@
+enum Address {
+  STREET
+  DISTRICT
+  HOME_NUMBER
+  CITY
+  COUNTRY
+}
+
+type Hospita @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  phon: [AWSPhone]
+  address: [Address]
+}
+
+type ECGRecord @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  time: AWSDateTime
+  ecg: String
+  userinfoID: ID! @index(name: "byUserInfo")
+}
+
+type SPO2Record @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  time: AWSDateTime
+  spo2: Int
+  userinfoID: ID! @index(name: "byUserInfo")
+}
+
+type HeartRateRecord @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  time: AWSDateTime
+  heart_rate: Int
+  userinfoID: ID! @index(name: "byUserInfo")
+}
+
+type UserInfo @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  first_name: String
+  last_name: String
+  birthday: AWSDate
+  weight: Float
+  height: Float
+  is_male: Boolean
+  phone: AWSPhone
+  address: Address
+  ECGRecords: [ECGRecord] @hasMany(indexName: "byUserInfo", fields: ["id"])
+  SPO2Records: [SPO2Record] @hasMany(indexName: "byUserInfo", fields: ["id"])
+  HeartRateRecords: [HeartRateRecord] @hasMany(indexName: "byUserInfo", fields: ["id"])
+}

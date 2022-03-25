@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { DataStore } from "@aws-amplify/datastore";
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
+import { Amplify } from "aws-amplify";
+import React, { useEffect } from "react";
+import awsExports from "./aws-exports";
+import { Hospita } from "./models";
 
-function App() {
+Amplify.configure(awsExports);
+
+function App({ signOut, user }: { signOut: any; user: any }) {
+  useEffect(() => {
+    const getData = async () => {
+      const models = await DataStore.query(Hospita);
+      console.log(models);
+    };
+    getData();
+  });
+
+  const addData = async () => {
+    await DataStore.save(
+      new Hospita({
+        name: "Lorem ipsum dolor sit amet ",
+        phon: [],
+        address: [],
+      }),
+    );
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>Hello {user.email}</h1>
+      <button onClick={signOut}>Sign out</button>
+      <button onClick={addData}>Add data</button>
+    </>
   );
 }
 
-export default App;
+export default withAuthenticator(App);

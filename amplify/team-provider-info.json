@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-healthtrace-staging-12043-authRole",
+      "UnauthRoleArn": "arn:aws:iam::940641060346:role/amplify-healthtrace-staging-12043-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::940641060346:role/amplify-healthtrace-staging-12043-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-healthtrace-staging-12043-deployment",
+      "UnauthRoleName": "amplify-healthtrace-staging-12043-unauthRole",
+      "StackName": "amplify-healthtrace-staging-12043",
+      "StackId": "arn:aws:cloudformation:us-east-1:940641060346:stack/amplify-healthtrace-staging-12043/caab7550-abd9-11ec-a3dd-0ef1b6f37941",
+      "AmplifyAppId": "dgpabq4ib47ia"
+    },
+    "categories": {
+      "auth": {
+        "HealthTrace": {}
+      }
+    }
+  }
+}
